@@ -7,9 +7,13 @@ require 'yaml'
 # Python 2 based salt packages are not available for all OS, i.e.
 # for Debian 10 only Python 3 packages available in official repo
 PYTHON = ENV.fetch("PYTHON", "3")
-# Load template project by default (i.e. if we in devkit root)
+# If we in devkit root load 'work' project if it's present, otherwise load template project by default
 if File.exist?('Vagrantfile')
-  BASE = Dir.pwd + "/template"
+  if Dir.exist?('work')
+    BASE = Dir.pwd + "/work"
+  else
+    BASE = Dir.pwd + "/template"
+  end
 else
   # load BASE from environment or use current working dir by default
   BASE = ENV.fetch("BASE", Dir.pwd)
