@@ -17,6 +17,6 @@ master:
     # use folder in parent directory
     # - ["../../formulas-public", "/srv/salt/formulas-public"]
 minions:
-  # ["minion-name",  "last IP octet ", "RAM in MB", "image", "python major version"]
-  - ["minion-centos8",  "11", "1024", "bento/centos-8",  "3"]
-  - ["minion-debian10", "12", "1024", "bento/debian-10", "3"]
+  # ["minion-name",  "last IP octet ", "RAM in MB", "image", "python major version", "salt provisioner install_type"]
+  - ["minion-centos8",  "11", "1024", "bento/centos-8",  "3", "stable 3001"]
+  - ["minion-debian10", "12", "1024", "bento/debian-10", "3", "stable"]

@@ -78,8 +78,8 @@ Vagrant.configure("2") do |config|
   end
 
   ## Salt Minions ##
-  minions = CONFIG.fetch("minions", [["minion-debian10", "254", "1024", "bento/debian-10", "3"]])
-  minions.each do |vmname,ip,mem,os,py_ver|
+  minions = CONFIG.fetch("minions", [["minion-debian10", "254", "1024", "bento/debian-10", "3", "stable"]])
+  minions.each do |vmname,ip,mem,os,py_ver,inst_type|
     config.vm.define "#{vmname}" do |minion_config|
       # Minimum required synced folders
       synced_folders = [
@@ -100,7 +100,7 @@ Vagrant.configure("2") do |config|
       end
       # Install salt packages using salt provisioner
       minion_config.vm.provision :salt do |salt|
-        salt.install_type = install_type
+        salt.install_type = inst_type.nil? ? install_type : inst_type
         salt.python_version = py_ver.nil? ? PYTHON : py_ver
         salt.verbose = true
         salt.colorize = true
