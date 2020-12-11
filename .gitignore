@@ -1,5 +1,11 @@
-.vagrant
-.vscode
-.env
-bootstrap-salt.sh
-/work/*
+# Ignore everything
+*
+
+# Except this
+!.gitignore
+!Vagrantfile
+!README*
+!demo/
+!demo/*
+!template/
+!template/*
