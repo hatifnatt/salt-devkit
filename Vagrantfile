@@ -19,6 +19,7 @@ else
   BASE = ENV.fetch("BASE", Dir.pwd)
 end
 puts "Using '#{BASE}' as project root"
+PROJECT = File.basename(BASE)
 
 CONFIG_FILE = "#{BASE}/config.yaml"
 puts "Loading config: #{CONFIG_FILE}"
@@ -34,8 +35,9 @@ Vagrant.configure("2") do |config|
   install_type = CONFIG.fetch("install_type", "stable")
 
   ## Salt Master ##
-  config.vm.define :master, primary: true do |master_config|
-    cfg = CONFIG.fetch("master", {})
+  cfg = CONFIG.fetch("master", {})
+  master_name = cfg.fetch("name", "master-#{PROJECT}")
+  config.vm.define :"#{master_name}", primary: true do |master_config|
     ip = cfg.fetch("ip", "10")
     # Minimum required synced folders
     synced_folders = [
@@ -50,9 +52,9 @@ Vagrant.configure("2") do |config|
     end
     # Salt Master VM properties
     master_config.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
-      vb.cpus = 1
-      vb.name = "saltmaster"
+      vb.memory = cfg.fetch("memory", "2048")
+      vb.cpus = cfg.fetch("cpus", "1")
+      vb.name = cfg.fetch("name", "saltmaster-#{PROJECT}")
     end
     master_config.vm.box = cfg.fetch("os", "bento/debian-10")
     master_config.vm.host_name = cfg.fetch("host_name", "saltmaster.local")

@@ -10,6 +10,12 @@ master:
   # note, same IP must be used in provision/etc/salt/minion.d/99-master.conf file
   # last IP octet for master VM
   ip: "10"
+  cpus: 1
+  memory: 2048
+  # VM name and Vagrant scope name for master VM
+  # if not specified, default name became 'master-project'
+  # i.e. if project path /home/user/salt-devkit/myproject, VM name will be 'master-myproject'
+  # name: master
   synced_folders:
     # src path is relative to current directory
     # - ["src", "dst"]
