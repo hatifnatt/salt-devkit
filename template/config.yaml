@@ -2,9 +2,9 @@
 net_ip: "192.168.150"
 # https://www.vagrantup.com/docs/provisioning/salt#install_type
 # also possible to specify exact version i.e: "stable 3001.2"
-install_type: "stable 3001"
+install_type: "stable 3006"
 master:
-  os: "bento/centos-8"
+  os: "bento/debian-12"
   py_ver: "3"
   host_name: 'saltmaster.local'
   # note, same IP must be used in provision/etc/salt/minion.d/99-master.conf file
@@ -24,5 +24,5 @@ master:
     # - ["../../formulas-public", "/srv/salt/formulas-public"]
 minions:
   # ["minion-name",  "last IP octet ", "RAM in MB", "image", "python major version", "salt provisioner install_type"]
-  - ["minion-centos8",  "11", "1024", "bento/centos-8",  "3", "stable 3001"]
-  - ["minion-debian10", "12", "1024", "bento/debian-10", "3", "stable"]
+  - ["minion-debian11",  "11", "1024", "bento/debian-11",  "3", "stable 3006"]
+  - ["minion-debian12", "12", "1024", "bento/debian-12", "3", "stable 3006"]
